@@ -1,4 +1,4 @@
-package com.technofreak.projectv12
+package com.technofreak.projectv12.utils
 
 import android.graphics.Rect
 import android.view.View

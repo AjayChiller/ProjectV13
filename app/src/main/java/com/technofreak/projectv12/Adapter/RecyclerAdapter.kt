@@ -1,4 +1,8 @@
-package com.technofreak.projectv12
+package com.codingwithmitch.mvvmrecyclerview.models
+
+import com.technofreak.projectv12.R
+import com.technofreak.projectv12.models.Albums
+
 
 
 import android.util.Log
@@ -11,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.layout_blog_list_item.view.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.technofreak.projectv12.models.Albums
 import kotlin.collections.ArrayList
 
 
@@ -91,7 +94,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
         fun bind(album: Albums){
 
 
-                Log.i("DEBUGme",""+album.imagePath)
+            Log.i("DEBUGme",""+album.imagePath)
 
 
             val requestOptions = RequestOptions()
@@ -103,7 +106,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
                 .load(album.imagePath)
                 .into(imagePath)
             folderNames.setText(album.folderNames)
-            imgCount.setText("------------")
+            imgCount.setText(album.imagePath)
 
         }
 

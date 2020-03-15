@@ -10,6 +10,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.codingwithmitch.mvvmrecyclerview.models.RecyclerAdapter
+import com.technofreak.projectv12.models.Albums
+import com.technofreak.projectv12.utils.TopSpacingItemDecoration
+import com.technofreak.projectv12.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        viewModel.settemp(this)
         if (!hasPermissions(this)) {
             this.getPermission()
 
         }
         else{
+            viewModel.init(this)
             initRecyclerView()
             addDataSet()
 
@@ -40,15 +44,16 @@ class MainActivity : AppCompatActivity() {
     }
     private fun addDataSet(){
 
-        val data = viewModel.loadAllImages()
-        albumAdapter.submitList(data)
+        val data : ArrayList<Albums>? = viewModel.mAlbums
+        data?.let { albumAdapter.submitList(it) }
     }
 
     private fun initRecyclerView(){
 
         recycler_view.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            val topSpacingDecorator = TopSpacingItemDecoration(30)
+            val topSpacingDecorator =
+                TopSpacingItemDecoration(30)
             addItemDecoration(topSpacingDecorator)
             albumAdapter = RecyclerAdapter()
             adapter = albumAdapter
